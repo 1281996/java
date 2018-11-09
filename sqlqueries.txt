@@ -106,6 +106,12 @@ SQL> select * from emp;
   2  ;
 10.SQL>  SELECT SAL,ROWNUM FROM (SELECT SAL,ENAME FROM EMP ORDER BY SAL ASC) WHERE ROWNUM<=3;
 
+
+11.   select e.ename as manager, count(*) as subordintes
+ 2  from emp e,emp m
+ 3  where e.empno=m.mgr
+ 4* group by e.empno,e.ename
+
 12.
 
 SQL> SELECT DISTINCT E.ENAME AS EMPLOYEE, E.JOB AS DESIGNATION, E.SAL AS SALARY,
@@ -135,5 +141,13 @@ SQL> select job
   5  select job
   6  from emp
   7  where deptno=20;
-
+17.
+     SELECT * FROM EMP
+ WHERE DEPtno IN
+  (
+    SELECT deptno
+     FROM EMp
+    GROUP BY DEptno
+    HAVING COUNT(*)>3
+  )
  
